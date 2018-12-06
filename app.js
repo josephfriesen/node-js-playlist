@@ -1,32 +1,55 @@
-var http = require('http');
-var fs = require('fs');
+const http = require('http');
+const fs = require('fs');
+const express = require('express');
 
-// // 12 Creating a Server
+const app = express();
+
+app.set('view engine', 'ejs');
+
+app.get('/', function(request, response) {
+  response.sendFile(__dirname + '/index.html');
+});
+
+app.get('/contact', function(request, response) {
+  response.sendFile(__dirname + '/contact.html');
+});
+
+app.get('/profile/:name', function(request, response) {
+  const data = {
+    name: 'Joe',
+    salutation: 'Hi!',
+    height: 'really tall',
+    coolness: 'really cool',
+    numbers: [6, 1.5, 2, 88, -12]
+  }
+  response.render('profile', {data: data});
+})
+
+app.listen(3000);
+console.log('Listening on port 3000');
 
 // var server = http.createServer(function(request, response) {
 //   console.log('request made', request.url);
-//   response.writeHead(200, {'Content-Type': 'text/plain'});
-//   response.end('Leave me alone.');
+//   if (request.url === '/home' || request.url === '/') {
+//     response.writeHead(200, {'Content-Type': 'text/html'});
+//     fs.createReadStream(__dirname + '/index.html').pipe(response);
+//   } else if (request.url === '/contact') {
+//     response.writeHead(200, {'Content-Type': 'text/html'});
+//     fs.createReadStream(__dirname + '/contact.html').pipe(response);
+//   } else if (request.url === '/api/data') {
+//     var myObj = fs.readFileSync('./data.json', 'utf8');
+//     response.writeHead(200, {'Content-Type': 'application/json'});
+//     response.end(JSON.stringify(myObj));
+//   } else {
+//     response.writeHead(200, {'Content-Type': 'text/html'});
+//     fs.createReadStream(__dirname + '/404.html').pipe(response);
+//   }
 // });
 //
 // server.listen(3000, '127.0.0.1');
 // console.log('Listening on port 3000');
 
-// 14/15 Readable Streams / Writable Streams
-
-var myReadStream = fs.createReadStream(__dirname + '/readme.txt', 'utf8');
-var myWriteStream = fs.createWriteStream(__dirname + '/writeme.txt');
-
-myReadStream.on('data', function(chunk) {
-  console.log('new chunk received');
-  myWriteStream.write(chunk)
-});
-
-// 16 Pipes
-
-
-
-// PRELIMINARY LESSONS
+// PRELIM
 
 // // 10 Creating and Removing directories
 // var fs = require('fs');
