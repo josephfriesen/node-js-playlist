@@ -1,32 +1,63 @@
+// imports
 const http = require('http');
 const fs = require('fs');
 const express = require('express');
+const bodyParser = require('body-parser');
+const toDoController = require('./controllers/toDoController');
 
+// initialize
 const app = express();
-
 app.set('view engine', 'ejs');
-
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/index.html');
-});
-
-app.get('/contact', function(request, response) {
-  response.sendFile(__dirname + '/contact.html');
-});
-
-app.get('/profile/:name', function(request, response) {
-  const data = {
-    name: 'Joe',
-    salutation: 'Hi!',
-    height: 'really tall',
-    coolness: 'really cool',
-    numbers: [6, 1.5, 2, 88, -12]
-  }
-  response.render('profile', {data: data});
-})
-
+app.use(express.static('./public'));
 app.listen(3000);
 console.log('Listening on port 3000');
+
+// call controllers
+toDoController(app);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const urlencodedParser = bodyParser.urlencoded({ extended: false });
+//
+// app.set('view engine', 'ejs');
+// app.use('/assets', express.static('assets'));
+//
+// app.get('/', function(request, response) {
+//   response.render('index');
+// });
+//
+// app.get('/contact', function(request, response) {
+//   response.render('contact', {qs: request.query});
+// });
+//
+// app.post('/contact', urlencodedParser, function(request, response) {
+//   console.log(request.body);
+//   response.render('contact-success', {data: request.body});
+// });
+//
+// app.get('/profile/:name', function(request, response) {
+//   const data = {
+//     name: 'Joe',
+//     salutation: 'Hi!',
+//     height: 'really tall',
+//     coolness: 'really cool',
+//     numbers: [6, 1.5, 2, 88, -12]
+//   }
+//   response.render('profile', {data: data});
+// })
+//
+// app.listen(3000);
+// console.log('Listening on port 3000');
 
 // var server = http.createServer(function(request, response) {
 //   console.log('request made', request.url);

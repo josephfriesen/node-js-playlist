@@ -1,0 +1,22 @@
+body {
+  background: hotpink;
+  font-family:sans-serif;
+  color: blue;
+  padding: 30px;
+}
+
+h1 {
+  font-size: 48px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+p, li {
+  font-size: 16px;
+  text-align: center;
+}

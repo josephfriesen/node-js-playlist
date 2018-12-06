@@ -3,14 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>What up</title>
-    <style>
-      body{background: hotpink; font-family:sans-serif; color: green; padding: 30px;}
-      h1{font-size: 48px; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
-      p, li{font-size: 16px; text-align: center;}
-      h2{font-size: 24px;}
-    </style>
+    <link href="/assets/styles.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <% include partials/nav.ejs %>
     <h1>PROFILE</h1>
     <h2><%= data.salutation %></h2>
     <p>Name: <%= data.name %></p>
